@@ -5,7 +5,7 @@
 [Requests文档](http://docs.python-requests.org/zh_CN/latest/index.html)
 
 ### Beautiful Soup 4.4.0 文档
-[Beautiful Soup 4.4.0 文档](http://docs.python-requests.org/zh_CN/latest/index.html)
+[Beautiful Soup 4.4.0 文档](http://beautifulsoup.readthedocs.io/zh_CN/latest/)
 
 ### 绘制图表
 [matplotlib](http://matplotlib.org/index.html)
