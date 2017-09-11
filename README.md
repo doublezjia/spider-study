@@ -17,3 +17,5 @@
 [Python爬虫学习系列教程](http://cuiqingcai.com/1052.html)
 
 [静觅博客](http://cuiqingcai.com/)
+
+[scrapy文档](http://scrapy-chs.readthedocs.io/zh_CN/0.24/index.html)
