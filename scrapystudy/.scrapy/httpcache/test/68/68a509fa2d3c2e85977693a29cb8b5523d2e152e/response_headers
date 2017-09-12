@@ -1,0 +1,15 @@
+Vary: Accept-Encoding
+Cache-Control: must-revalidate, no-cache, private
+Pragma: no-cache
+X-Douban-Newbid: 80nq2_E4wHk
+Expires: Sun, 1 Jan 2006 01:00:00 GMT
+Date: Tue, 12 Sep 2017 03:29:05 GMT
+X-Dae-App: movie
+X-Dae-Node: daisy7c
+X-Content-Type-Options: nosniff
+Content-Encoding: gzip
+Server: dae
+Set-Cookie: bid=80nq2_E4wHk; Expires=Wed, 12-Sep-18 03:29:05 GMT; Domain=.douban.com; Path=/
+Content-Type: text/html; charset=utf-8
+X-Xss-Protection: 1; mode=block
+X-Douban-Mobileapp: 0
