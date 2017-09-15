@@ -5,7 +5,7 @@ from random import randint
 class Die():
     '''扔骰子的类'''
  
-    def __init__(self,num_sides=6):
+    def __init__(self,num_sides=7):
         self.num_sides = num_sides # 骰子的面数
  
     def roll(self):
@@ -34,7 +34,7 @@ for value in range(1,die.num_sides+1):
 # 对结果进行可视化
 hist = pygal.Bar()      # 生成实例
 hist.title = 'Results of rolling one D6 1000 times'  # 标题
-hist.x_labels = ['1','2','3','4','5','6']           # X轴数值坐标
+hist.x_labels = ['1','2','3','4','5','6','7']           # X轴数值坐标
 hist.x_title = 'Result'                                 # X轴标题
 hist.y_title = 'Frequency of Result'                # Y轴标题
  
