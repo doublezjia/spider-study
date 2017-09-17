@@ -9,4 +9,6 @@ import scrapy
 
 
 class PyspiderItem(scrapy.Item):
+	name = scrapy.Field()
 	image_urls = scrapy.Field()
+	image_paths = scrapy.Field()

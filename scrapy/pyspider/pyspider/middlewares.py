@@ -4,9 +4,9 @@
 #
 # See documentation in:
 # http://doc.scrapy.org/en/latest/topics/spider-middleware.html
-
+import scrapy,random
 from scrapy import signals
-
+from scrapy.downloadermiddlewares.useragent import UserAgentMiddleware
 
 class PyspiderSpiderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,
@@ -54,3 +54,18 @@ class PyspiderSpiderMiddleware(object):
 
     def spider_opened(self, spider):
         spider.logger.info('Spider opened: %s' % spider.name)
+
+# 随机请求头
+class UserAgentListMiddleware(UserAgentMiddleware):
+    """set User-Agent"""
+    def __init__(self, user_agent):
+        self.user_agent = user_agent
+    
+    @classmethod
+    def from_crawler(cls,crawler):
+        return cls(
+            user_agent = crawler.settings.get('USER_AGENT_LIST')
+            )
+        def process_request(self,request,spider):
+            agent = random.choice(self.user_agent)
+            request.headers['User-Agent'] = agent
