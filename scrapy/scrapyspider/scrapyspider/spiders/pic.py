@@ -3,7 +3,7 @@ import scrapy,sys
 from scrapy.linkextractors import LinkExtractor
 from scrapy.spiders import CrawlSpider, Rule
 from bs4 import BeautifulSoup
-from pyspider.items import PyspiderItem
+from scrapyspider.items import ScrapyspiderItem
 
 class PicSpider(CrawlSpider):
     name = 'pic'
@@ -18,7 +18,7 @@ class PicSpider(CrawlSpider):
     imageurl = []
     def parse_item(self, response):
         # print(response.url)
-        item = PyspiderItem()
+        item = ScrapyspiderItem()
         soup = BeautifulSoup(response.body,'html.parser')
         try:
             data = soup.find('div',class_='content-c').find_all('img')
@@ -30,5 +30,3 @@ class PicSpider(CrawlSpider):
             yield item
         except:
             pass
-
-

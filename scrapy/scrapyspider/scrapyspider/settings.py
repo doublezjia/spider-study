@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Scrapy settings for pyspider project
+# Scrapy settings for scrapyspider project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -9,17 +9,17 @@
 #     http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 #     http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'pyspider'
+BOT_NAME = 'scrapyspider'
 
-SPIDER_MODULES = ['pyspider.spiders']
-NEWSPIDER_MODULE = 'pyspider.spiders'
+SPIDER_MODULES = ['scrapyspider.spiders']
+NEWSPIDER_MODULE = 'scrapyspider.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-# USER_AGENT = 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.79 Safari/537.36'
+#USER_AGENT = 'scrapyspider (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = True
+ROBOTSTXT_OBEY = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
@@ -27,7 +27,7 @@ ROBOTSTXT_OBEY = True
 # Configure a delay for requests for the same website (default: 0)
 # See http://scrapy.readthedocs.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-# DOWNLOAD_DELAY = 3
+#DOWNLOAD_DELAY = 3
 # The download delay setting will honor only one of:
 #CONCURRENT_REQUESTS_PER_DOMAIN = 16
 #CONCURRENT_REQUESTS_PER_IP = 16
@@ -47,14 +47,13 @@ ROBOTSTXT_OBEY = True
 # Enable or disable spider middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    'pyspider.middlewares.PyspiderSpiderMiddleware': 543,
+#    'scrapyspider.middlewares.ScrapyspiderSpiderMiddleware': 543,
 #}
 
 # Enable or disable downloader middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
-   # 'pyspider.middlewares.MyCustomDownloaderMiddleware': 543,
-   'pyspider.middlewares.UserAgentListMiddleware': 543,
+   'scrapyspider.middlewares.UserAgentListMiddleware': 543,
    'scrapy.downloadermiddleware.useragent.UserAgentMiddleware':None
 }
 
@@ -67,7 +66,7 @@ DOWNLOADER_MIDDLEWARES = {
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-   'pyspider.pipelines.DownloadimagePipeline': 300,
+   'scrapyspider.pipelines.DownloadimagePipeline': 300,
 }
 IMAGES_STORE = 'images'
 IMAGES_EXPIRES = 90

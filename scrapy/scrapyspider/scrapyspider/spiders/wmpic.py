@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import scrapy
 from bs4 import BeautifulSoup
-from pyspider.items import PyspiderItem
+from scrapyspider.items import ScrapyspiderItem
 from scrapy.http import Request
 
 class WmpicSpider(scrapy.Spider):
@@ -17,7 +17,7 @@ class WmpicSpider(scrapy.Spider):
 			url = self.bash_url+str(i)
 			yield Request(url,self.parse)
 	def parse(self, response):
-		item = PyspiderItem()
+		item = ScrapyspiderItem()
 		soup = BeautifulSoup(response.body,'html.parser')
 		data = soup.find('ul',class_='item_list').find_all('div',class_='post')
 		for i in data:
