@@ -69,3 +69,20 @@ class UserAgentListMiddleware(UserAgentMiddleware):
     def process_request(self,request,spider):
         agent = random.choice(self.user_agent)
         request.headers['User-Agent'] = agent
+
+
+# 代理IP
+class ProxyMiddleware(object):
+    def process_request(self,request,spider):
+        ippool = [
+        'http://221.202.248.27:8118',
+        'http://182.46.69.156:4382',
+        'http://183.47.136.193:8118',
+        'http://113.200.36.181:80',
+        'http://222.76.174.106:8118',
+        'http://61.135.217.7:80',
+        'http://119.55.136.97:80',
+        ]
+        # 随机获取代理IP，random.choice是获取列表、字典、元祖的随机值。
+        ip = random.choice(ippool)
+        request.meta['proxy'] = ip

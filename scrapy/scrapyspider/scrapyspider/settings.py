@@ -33,7 +33,7 @@ ROBOTSTXT_OBEY = False
 #CONCURRENT_REQUESTS_PER_IP = 16
 
 # Disable cookies (enabled by default)
-#COOKIES_ENABLED = False
+COOKIES_ENABLED = True
 
 # Disable Telnet Console (enabled by default)
 #TELNETCONSOLE_ENABLED = False
@@ -55,6 +55,9 @@ ROBOTSTXT_OBEY = False
 DOWNLOADER_MIDDLEWARES = {
    'scrapy.downloadermiddleware.useragent.UserAgentMiddleware':None,
    'scrapyspider.middlewares.UserAgentListMiddleware': 400,
+   'scrapy.downloadermiddlewares.cookies.CookiesMiddleware':700,
+   'scrapy.contrib.downloadermiddleware.httpproxy.HttpProxyMiddleware':110,
+   'scrapyspider.middlewares.ProxyMiddleware':100,
 }
 
 # Enable or disable extensions
