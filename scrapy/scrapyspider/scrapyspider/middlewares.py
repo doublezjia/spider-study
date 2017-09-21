@@ -66,6 +66,6 @@ class UserAgentListMiddleware(UserAgentMiddleware):
         return cls(
             user_agent = crawler.settings.get('USER_AGENT_LIST')
             )
-        def process_request(self,request,spider):
-            agent = random.choice(self.user_agent)
-            request.headers['User-Agent'] = agent
+    def process_request(self,request,spider):
+        agent = random.choice(self.user_agent)
+        request.headers['User-Agent'] = agent
