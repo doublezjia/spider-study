@@ -220,10 +220,13 @@ class UserAgentListMiddleware(UserAgentMiddleware):
         return cls(
             user_agent = crawler.settings.get('USER_AGENT_LIST')
             )
-        def process_request(self,request,spider):
-            agent = random.choice(self.user_agent)
-            request.headers['User-Agent'] = agent
+    def process_request(self,request,spider):
+        agent = random.choice(self.user_agent)
+        request.headers['User-Agent'] = agent
 ```
+
+参考：[Scrapy学习篇（十一）之设置随机User-Agent](http://www.cnblogs.com/cnkai/p/7401343.html)
+
 ---
 
 ## 代理IP设置
@@ -256,3 +259,4 @@ class ProxyMiddleware(object):
 
 参考：[Scrapy: 如何设置代理 - 简书](http://www.jianshu.com/p/b456f94cfdd3)
 
+---
