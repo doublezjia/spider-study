@@ -22,6 +22,7 @@ pip install Scrapy
 scrapy startproject 项目名
 ```
   项目目录如下
+
 ![目录](http://ovv4v0gcw.bkt.clouddn.com/scrapy01.png)
 
 items.py是用来定义爬取字段的
@@ -185,6 +186,7 @@ class DownloadimagePipeline(ImagesPipeline):
 > `file_path`中的`request.meta['item']`要在函数`get_media_requests`中Request的时候把item赋值到meta中。如`scrapy.Request(img_url,meta={'item':item,})`
 
 在settings.py中找到`ITEM_PIPELINES`把注释去掉，把类名改为`DownloadimagePipeline`，添加文件路径`IMAGES_STORE`和文件过期时间`IMAGES_EXPIRES`。
+
 ![settings的设置](http://ovv4v0gcw.bkt.clouddn.com/scrapydownpic01.png)
 
 参考：[Scrapy文档 下载图片](http://scrapy-chs.readthedocs.io/zh_CN/0.24/topics/images.html)
@@ -194,9 +196,11 @@ class DownloadimagePipeline(ImagesPipeline):
 ### 随机请求头
 
 在settings.py中添加`USER_AGENT_LIST`的列表
+
 ![USER_AGENT_LIST](http://ovv4v0gcw.bkt.clouddn.com/scrapy_useragent01.png)
 
 把`DOWNLOADER_MIDDLEWARES`的注释去掉，并按图片所示设置。
+
 ![DOWNLOADER_MIDDLEWARES](http://ovv4v0gcw.bkt.clouddn.com/scrapy_useragent02.png)
 
 然后就在`middlewares.py`中添加如下类
