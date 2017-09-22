@@ -260,3 +260,54 @@ class ProxyMiddleware(object):
 参考：[Scrapy: 如何设置代理 - 简书](http://www.jianshu.com/p/b456f94cfdd3)
 
 ---
+
+##Scrapy 模拟登录
+
+可以通过`FormRequest.from_response()`发送表单的数据进行模拟登录。
+
+网站表单的数据可以通过chrome获取，可以通过F12进入开发者模式，选择Network然后查看表单数据。
+>这里可以不要输入正确的密码，然后就查看表单的字段，因为密码正确就直接跳转了，这样就看不到了。
+>有些网站可能用了`xsrf`或者`csrf`认证，所以要在`html`中找到这个`xsrf`并获取到其值，一般是`hidden`的
+
+
+![chrome开发者模式](http://ovv4v0gcw.bkt.clouddn.com/scrapy_login01.png)
+
+
+思路：可以先通过`start_requests`，Request到登录页面，然后通过`FormRequest.from_response()`发送表单post请求，然后再进一步操作。
+
+例子：
+```
+# -*- coding: utf-8 -*-
+import scrapy
+from scrapy.http import Request,FormRequest
+
+class TestSpider(scrapy.Spider):
+    name = 'test'
+    allowed_domains = ['doublezjia.com']
+    def start_requests(self):
+    	return [Request('http://doublezjia.com/wp-login.php',callback=self.login)]
+    def login(self,response):
+    	redirect=response.xpath('//*[@id="loginform"]/p[4]/input[2]/@value').extract_first()
+    	testcookie = response.xpath('//*[@id="loginform"]/p[4]/input[3]/@value').extract_first()
+    	return [FormRequest.from_response(
+    		response,
+    		formdata={
+    		'log':'用户名',
+    		'pwd':'密码',
+    		'redirect_to':redirect,
+    		'testcookie':testcookie
+    		},
+    		callback=self.after_login
+    		)]
+    def after_login(self,response):
+    	return [Request('http://doublezjia.com/wp-admin/post-new.php',callback=self.parse)]
+    def parse(self, response):
+        title = response.xpath('//*[@id="title"]/@value').extract_first()
+        print (title)
+```
+>这里是登录进网站，然后截取某个页面的内容。
+
+参考：
+-[Scrapy文档 request-response ](http://scrapy-chs.readthedocs.io/zh_CN/latest/topics/request-response.html)
+
+---
