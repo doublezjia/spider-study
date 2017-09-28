@@ -311,3 +311,61 @@ class TestSpider(scrapy.Spider):
 -[Scrapy文档 request-response ](http://scrapy-chs.readthedocs.io/zh_CN/latest/topics/request-response.html)
 
 ---
+
+## Scrapy爬去数据并保存到Mysql中
+
+保存到MYsql中与保存图片类似，在`pipelines.py`中新建一个类，然后在这个类里面通过`MySQLdb`(Python2)或者`pymysql`(Python3)连接数据库，并执行插入数据的操作。
+
+例子：
+```
+import pymysql,datetime
+#这里用的是PYTHON3.5，所以用pymysql
+class WeatherMySQLStorePipeline(object):
+	def __init__(self):
+		# 数据库信息
+		sqlconfig={
+		'user': 'root',
+		'password':'root',
+		'db':'scrapy',
+		'host': '127.0.0.1',
+		'port': 3306,
+		}
+		# 连接数据库，**sqlconfig这个意思等于 user='root',password='root'等，表示关键字参数。
+		self.conn = pymysql.connect(**sqlconfig)
+		self.cursor = self.conn.cursor()
+
+	def process_item(self,item,spider):
+		curTime = datetime.datetime.now()
+		# 执行插入语句
+		self.cursor.execute('insert into weather(name,temperature,date) values(%s,%s,%s)',(item['name'].encode('utf-8'),item['temperature'].encode('utf-8'),curTime))
+		self.conn.commit()
+		return item
+```
+
+然后在settings.py中的`ITEM_PIPELINES`中把这个类添加上去。
+
+![settings中的设置](http://ovv4v0gcw.bkt.clouddn.com/scrapymysql01.png)
+
+后面的数字表示权重，范围在0-1000内即可
+
+spider的脚本如下：
+
+```
+#爬去天气
+class WeatherSpider(scrapy.Spider):
+    name = 'weather'
+    allowed_domains = ['www.weather.com.cn']
+    start_urls = ['http://www.weather.com.cn/weather1d/101280101.shtml']
+
+    def parse(self, response):
+        name = response.xpath('//*[@id="around"]/div[1]/ul/li/a/span/text()').extract()
+        temp = response.xpath('//*[@id="around"]/div[1]/ul/li/a/i/text()').extract()
+        item = ScrapyspiderItem()
+        for i in range(len(name)):
+        	# print (name[i]+' '+temp[i])
+        	item['name'] = name[i]
+        	item['temperature'] = temp[i]
+        	yield item
+```
+
+mysql的数据库和表要新建好。
