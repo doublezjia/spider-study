@@ -4,9 +4,10 @@
 #
 # See documentation in:
 # http://doc.scrapy.org/en/latest/topics/spider-middleware.html
-import scrapy,random
+import scrapy,random,sys
 from scrapy import signals
 from scrapy.downloadermiddlewares.useragent import UserAgentMiddleware
+from scrapyspider.proxysip import Porxysip
 
 class ScrapyspiderSpiderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,
@@ -74,15 +75,37 @@ class UserAgentListMiddleware(UserAgentMiddleware):
 # 代理IP
 class ProxyMiddleware(object):
     def process_request(self,request,spider):
-        ippool = [
-        'http://221.202.248.27:8118',
-        'http://182.46.69.156:4382',
-        'http://183.47.136.193:8118',
-        'http://113.200.36.181:80',
-        'http://222.76.174.106:8118',
-        'http://61.135.217.7:80',
-        'http://119.55.136.97:80',
-        ]
+
+        # 以下三个方法只能运行一个，用一个请把另外的注释掉
         # 随机获取代理IP，random.choice是获取列表、字典、元祖的随机值。
+
+        # 第一种
+        # 在ippool中手工添加代理ip
+        # ippool = [
+        # 'http://221.202.248.27:8118',
+        # 'http://182.46.69.156:4382',
+        # 'http://183.47.136.193:8118',
+        # 'http://113.200.36.181:80',
+        # 'http://222.76.174.106:8118',
+        # 'http://61.135.217.7:80',
+        # 'http://111.224.147.16:8118',
+        # ]
+        # ip = random.choice(ippool)
+
+        # 第二种
+        # 先通过proxysip.py生成TXT文本，然后在这里读取文本的代理IP 
+        # 代理ip列表文件路径,要修改。如果没有这个文件的请运行一下proxysip.py
+        ippool = []
+        ipfile = r'C:\Users\yw0682\Desktop\scrapy\scrapyspider\scrapyspider\iplist.txt'
+        with open(ipfile,'r') as f:
+            while f.readline():
+                ippool.append(f.readline().strip())
         ip = random.choice(ippool)
+
+        # 第三种
+        # 不读取文本,直接通过Porxysip()获取代理IP
+        # ippool = Porxysip()
+        # ip = random.choice(ippool.getaddress())
+        
+        # 这个不用注释,使用代理IP
         request.meta['proxy'] = ip

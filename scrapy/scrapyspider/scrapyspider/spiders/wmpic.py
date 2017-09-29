@@ -27,5 +27,4 @@ class WmpicSpider(scrapy.Spider):
 		item['image_urls'] = self.imgurl
 		# 获取名称并且去掉空格，因为xpath获取的是列表
 		item['name'] = response.xpath('//*[@id="mainbox"]/ul/li[1]/div[2]/h2/a/text()').extract()[0].strip()
-		# print (item['name'])
 		yield item

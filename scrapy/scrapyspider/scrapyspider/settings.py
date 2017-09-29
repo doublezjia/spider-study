@@ -36,7 +36,7 @@ ROBOTSTXT_OBEY = False
 COOKIES_ENABLED = True
 
 # Disable Telnet Console (enabled by default)
-#TELNETCONSOLE_ENABLED = False
+TELNETCONSOLE_ENABLED = False
 
 # Override the default request headers:
 #DEFAULT_REQUEST_HEADERS = {
@@ -70,6 +70,7 @@ DOWNLOADER_MIDDLEWARES = {
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
    'scrapyspider.pipelines.DownloadimagePipeline': 300,
+   # 'scrapyspider.pipelines.MySQLStorePipeline': 400,
 }
 IMAGES_STORE = 'images'
 IMAGES_EXPIRES = 90
@@ -84,7 +85,7 @@ IMAGES_EXPIRES = 90
 # each remote server
 #AUTOTHROTTLE_TARGET_CONCURRENCY = 1.0
 # Enable showing throttling stats for every response received:
-#AUTOTHROTTLE_DEBUG = False
+# AUTOTHROTTLE_DEBUG = False
 
 # Enable and configure HTTP caching (disabled by default)
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html#httpcache-middleware-settings

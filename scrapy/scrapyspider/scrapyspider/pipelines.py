@@ -4,7 +4,7 @@
 #
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
-import scrapy
+import scrapy,pymysql,datetime
 from scrapy.contrib.pipeline.images import ImagesPipeline
 from scrapy.exceptions import DropItem
 
@@ -12,6 +12,7 @@ class ScrapyspiderPipeline(object):
     def process_item(self, item, spider):
         return item
 
+# 下载图片
 class DownloadimagePipeline(ImagesPipeline):
 	def get_media_requests(self,item,info):
 		for img_url in item['image_urls']:
@@ -33,3 +34,27 @@ class DownloadimagePipeline(ImagesPipeline):
 		image_guid = request.url.split('/')[-1]
 		filename = r'full/{0}/{1}'.format(folder,image_guid)
 		return filename
+
+# 把数据保存到Mysql中
+class MySQLStorePipeline(object):
+	def __init__(self):
+		# 数据库信息
+		sqlconfig={
+		'user': 'root',
+		'password':'root',
+		'db':'scrapy',
+		'host': '127.0.0.1',
+		'port': 3306,
+		}
+		# 连接数据库，**sqlconfig这个意思等于 user='root',password='root'等，表示关键字参数。
+		self.conn = pymysql.connect(**sqlconfig)
+		self.cursor = self.conn.cursor()
+
+	def process_item(self,item,spider):
+		curTime = datetime.datetime.now()
+		# 执行插入语句
+		self.cursor.execute('insert into weather(name,temperature,date) values(%s,%s,%s)',(item['name'].encode('utf-8'),curTime))
+		self.conn.commit()
+		return item
+
+		
