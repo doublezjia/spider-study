@@ -69,8 +69,8 @@ DOWNLOADER_MIDDLEWARES = {
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-   'scrapyspider.pipelines.DownloadimagePipeline': 300,
-   # 'scrapyspider.pipelines.MySQLStorePipeline': 400,
+   # 'scrapyspider.pipelines.DownloadimagePipeline': 300,
+   'scrapyspider.pipelines.MySQLStorePipeline': 400,
 }
 IMAGES_STORE = 'images'
 IMAGES_EXPIRES = 90

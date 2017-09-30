@@ -16,17 +16,17 @@ class ScrapyspiderItem(scrapy.Item):
 	
 	# temperature = scrapy.Field()
 
-	# # 用户名
-	# user = scrapy.Field()
-	# # 粉丝
-	# follower = scrapy.Field()
-	# # 关注
-	# follow = scrapy.Field()
-	# # 评论
-	# discuss = scrapy.Field()
-	# # 糗事
-	# accelerated_again = scrapy.Field()
-	# #精选
-	# choice = scrapy.Field()
-	# # 笑脸
-	# smiling_face = scrapy.Field()
+	# 用户名
+	user = scrapy.Field()
+	# 粉丝
+	follower = scrapy.Field()
+	# 关注
+	follow = scrapy.Field()
+	# 评论
+	discuss = scrapy.Field()
+	# 糗事
+	accelerated_again = scrapy.Field()
+	#精选
+	choice = scrapy.Field()
+	# 笑脸
+	smiling_face = scrapy.Field()

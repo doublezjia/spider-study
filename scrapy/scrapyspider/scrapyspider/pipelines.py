@@ -53,8 +53,20 @@ class MySQLStorePipeline(object):
 	def process_item(self,item,spider):
 		curTime = datetime.datetime.now()
 		# 执行插入语句
-		self.cursor.execute('insert into weather(name,temperature,date) values(%s,%s,%s)',(item['name'].encode('utf-8'),curTime))
-		self.conn.commit()
+		self.cursor.execute('select name from qiubai where name = %s',(item['name'].encode('utf-8')))
+		
+		# fetchall() 返回多个元组，即返回多个记录(rows),如果没有结果 则返回 ()
+		sel = self.cursor.fetchall()
+		# print (sel)
+		if len(sel) == 0 :
+			self.cursor.execute(
+				'insert into qiubai(name,follower,follow,discuss,accelerated_again,choice,smiling_face,avatar,curtime) values(%s,%s,%s,%s,%s,%s,%s,%s,%s)',
+				(item['name'].encode('utf-8'),item['follower'].encode('utf-8'),
+					item['follow'].encode('utf-8'),item['discuss'].encode('utf-8'),
+					item['accelerated_again'].encode('utf-8'),item['choice'].encode('utf-8'),
+					item['smiling_face'].encode('utf-8'),item['image_urls'].encode('utf-8'),curTime)
+				)
+			self.conn.commit()
 		return item
 
 		
