@@ -136,13 +136,19 @@ def get_lc_rating(pgurl):
 		attr = ['没有评分','1星','2星','3星','4星','5星']
 		pie = Pie('豆瓣猎场最新短评\n星级评分百分比')
 		pie.add('',attr,rating_percent_list,is_label_show=True)
-		pie.render('lcpie.html')
+		# pie.render('lcpie.html')
 
-		# 柱状图
-		bar = Bar('豆瓣猎场最新短评星级评分人数')
+		# # 柱状图
+		bar = Bar('豆瓣猎场最新短评星级评分人数',width=1000)
 		bar.add('',attr,ratingstart_num_list,is_stack=True)
-		bar.render('lcbar.html')
-		print('图表生成结束,名称为饼状图：lcpie.html 柱状图：lcbar.html')
+		# bar.render('lcbar.html')
+
+		# 全部图表在同一个页面显示
+		page = Page()
+		page.add(bar)
+		page.add(pie)
+		page.render('liechang.html')
+		print('图表生成结束,名称为：liechang.html')
 
 
 if __name__ == '__main__':
