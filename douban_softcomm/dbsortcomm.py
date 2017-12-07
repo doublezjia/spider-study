@@ -150,7 +150,7 @@ def get_douban_rating(pg_url,pg_num,echart_title):
 		print ('生成图表')
 		attr = ['没有评分','1星','2星','3星','4星','5星']
 		pie = Pie('%s短评评星百分比' % echart_title,'数据来源豆瓣',width=900,title_pos='center')
-		pie.add('',attr,rating_percent_list,is_label_show=True,legend_pos='left',legend_orient='vertical')
+		pie.add('',attr,rating_percent_list,is_label_show=True,radius=[0,50],legend_pos='left',legend_orient='vertical')
 
 		# # 柱状图
 		bar = Bar('%s短评评星人数' % echart_title,'数据来源豆瓣',width=900,title_pos='center')
