@@ -42,6 +42,10 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
+
+# 防止递归深度出错 把值设置大一点
+sys.setrecursionlimit(1000000) 
+
 # 请求头
 headers={
 'User-Agent':'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36',
@@ -209,4 +213,4 @@ if __name__ == '__main__':
 	try:
 		main()
 	except KeyboardInterrupt:
-		print ('退出运行')
+		print ('退出运行')	
