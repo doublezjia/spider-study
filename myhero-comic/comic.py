@@ -162,10 +162,12 @@ def get_Comic_url(url):
 		return comic_down_url,root_dir,fdir
 	except AttributeError as e:
 		error = '[Error] Message: %s ,Error Page: %s \n' % (e,url)
-		print ('访问出错，页面没有匹配的内容')
+		print ('访问出错，页面没有匹配的内容,错误页面已记录在spider-log.log中')
 		with open('spider-log.log','a') as f:
-			f.write(error)		
-		sys.exit('退出运行')
+			f.write(error)
+		print ('开始获取下一页内容....')		
+		error_ep = url.replace('http://','').split('/')[-2]
+		Comic_next_page(url,error_ep)
 
 # 下载漫画
 def down_Comic(url,rootdir='file',fdir='test',fname='0'):
