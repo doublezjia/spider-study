@@ -146,10 +146,10 @@ def get_Comic_url(url):
 	# 通过platform.system()判断系统版本是Linux还是Windows,执行相应的PhantomJS
 	if platform.system() == 'Windows':
 		# 通过 selenium+PhantomJS 读取页面中JavaScript生成的图片地址
-		driver = webdriver.PhantomJS('./phantomjs/phantomjs-2.1.1-windows/bin/phantomjs.exe',service_args=service_args,desired_capabilities=dcap)
+		driver = webdriver.PhantomJS(executable_path='./phantomjs/phantomjs-2.1.1-windows/bin/phantomjs.exe',service_args=service_args,desired_capabilities=dcap)
 	elif platform.system() == 'Linux':
 		# 通过 selenium+PhantomJS 读取页面中JavaScript生成的图片地址
-		driver = webdriver.PhantomJS('./phantomjs/phantomjs-2.1.1-linux-x86_64/bin/phantomjs',service_args=service_args,desired_capabilities=dcap)
+		driver = webdriver.PhantomJS(executable_path='./phantomjs/phantomjs-2.1.1-linux-x86_64/bin/phantomjs',service_args=service_args,desired_capabilities=dcap)
 	driver.get(url)
 
 	# 匹配内容,selenium中是通过page_source读取获取到的页面内容
