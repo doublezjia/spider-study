@@ -121,7 +121,7 @@ def Comic_next_page(url,ep):
 			# 这个网站的其他漫画应该不会
 			myhero_url ='http://manhua.fzdm.com/131/'
 			if myhero_url in url:
-				if next_ep == '42':
+				if next_ep == '42' or next_ep == ep:
 					next_ep = int(ep)+1
 					if next_ep < 10:
 						next_ep = '0'+str(next_ep)
