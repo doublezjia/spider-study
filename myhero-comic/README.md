@@ -2,7 +2,7 @@
 
 ### 本爬虫是用来下载我的英雄学院的漫画
 
-爬去的地址为:[http://manhua.fzdm.com/131/](http://manhua.fzdm.com/131/)
+爬的地址为:[http://manhua.fzdm.com/131/](http://manhua.fzdm.com/131/)
 
 需要安装`BeautifulSoup`库和`selenium`库，可以通过`pip`安装
 
